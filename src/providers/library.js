@@ -10,4 +10,21 @@ const createLibrary = async (library) => {
   }
 };
 
-module.exports = { createLibrary };
+const getLibrary = async (id) => {
+  try {
+    const library = await Library.findByPk(id, { include: { all: true } });
+    return library;
+  } catch (error) {
+    console.log("error looking for the library", error);
+  }
+};
+
+const getLibraries = async () => {
+  try {
+    const libraries = await Library.findAll();
+    return libraries;
+  } catch (error) {
+    console.log("error looking for all libraries", error);
+  }
+};
+module.exports = { createLibrary, getLibrary, getLibraries };

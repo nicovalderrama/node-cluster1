@@ -9,4 +9,22 @@ const createLibrary = async (req, res) => {
   }
 };
 
-module.exports = { createLibrary };
+const getLibraryController = async (req, res) => {
+  try {
+    const getLibrary = await libraryServices.getLibrary(req.params.id);
+    res.json(getLibrary);
+  } catch (error) {
+    res.status(500).json({ action: "getLibraries", error: error.message });
+  }
+};
+
+const getLibrariesController = async (req, res) => {
+  try {
+    const libraries = await libraryServices.getLibraries();
+    res.json(libraries);
+  } catch (error) {
+    res.status(400).json({ action: "getLibraries", error: error.message });
+  }
+};
+
+module.exports = { createLibrary, getLibraryController, getLibrariesController };
