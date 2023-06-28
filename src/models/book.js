@@ -22,11 +22,11 @@ const Book = sequelize.define("Books", {
   year: {
     type: DataTypes.STRING,
     allowNull: false
-  },
-  library: {
-    type: DataTypes.INTEGER,
-    allowNull: false
   }
+}, {
+  paranoid: true,
+  updatedAt: false,
+  createdAt: false
 });
 
 module.exports = { Book };

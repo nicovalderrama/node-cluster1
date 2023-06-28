@@ -20,6 +20,10 @@ const Library = sequelize.define("Libraries", {
     type: DataTypes.STRING,
     allowNull: false
   }
+}, {
+  paranoid: true,
+  updatedAt: false,
+  createdAt: false
 });
 
 Library.hasMany(Book);

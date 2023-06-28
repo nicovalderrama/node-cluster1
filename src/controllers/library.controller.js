@@ -27,4 +27,22 @@ const getLibrariesController = async (req, res) => {
   }
 };
 
-module.exports = { createLibrary, getLibraryController, getLibrariesController };
+const updateLibraryController = async (req, res) => {
+  try {
+    const updateLibrary = await libraryServices.updateLibrary(req.params.id, req.body);
+    res.json(updateLibrary);
+  } catch (error) {
+    res.status(500).json({ action: "updateLibrary", error: error.message });
+  }
+};
+
+const deleteLibraryController = async (req, res) => {
+  try {
+    await libraryServices.deleteLibrary(req.params.id);
+    res.send("deleted");
+  } catch (error) {
+    res.status(500).json({ action: "deleteLibrary", error: error.message });
+  }
+};
+
+module.exports = { createLibrary, getLibraryController, getLibrariesController, updateLibraryController, deleteLibraryController };
