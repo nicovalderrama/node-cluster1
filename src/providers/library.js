@@ -17,6 +17,7 @@ const getLibrary = async (id) => {
     return library;
   } catch (error) {
     console.log("error looking for the library", error);
+    throw error;
   }
 };
 
@@ -31,6 +32,7 @@ const getLibraries = async () => {
     return libraries;
   } catch (error) {
     console.log("error looking for all libraries", error);
+    throw error;
   }
 };
 

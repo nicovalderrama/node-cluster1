@@ -26,4 +26,22 @@ const getAllBooks = async (req, res) => {
     res.status(500).json({ action: "getAllBooks", error: error.message });
   }
 };
-module.exports = { createBook, getBook, getAllBooks };
+
+const updateBook = async (req, res) => {
+  try {
+    const update = await bookServices.updateBook(req.params.id, req.body);
+    res.json(update);
+  } catch (error) {
+    res.status(500).json({ action: "updateBook", error: error.message });
+  }
+};
+
+const deleteBook = async (req, res) => {
+  try {
+    await bookServices.deleteBook(req.params.id);
+    res.send("book deleted!");
+  } catch (error) {
+    res.status(500).json({ action: "deleteBook", error: error.message });
+  }
+};
+module.exports = { createBook, getBook, getAllBooks, updateBook, deleteBook };

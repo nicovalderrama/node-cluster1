@@ -23,6 +23,7 @@ const getBook = async (bookId) => {
     return null;
   } catch (error) {
     console.error("error searching for the book", error);
+    throw error;
   }
 };
 
@@ -36,7 +37,33 @@ const getAllBooks = async () => {
     return books;
   } catch (error) {
     console.error("error looking for the books", error);
+    throw error;
   }
 };
 
-module.exports = { createBook, getBook, getAllBooks };
+const updateBook = async (bookId, data) => {
+  try {
+    const book = await getBook(bookId);
+    if (book) {
+      return book.update(data);
+    }
+    return null;
+  } catch (error) {
+    console.error("error updating the book", error);
+    throw error;
+  }
+};
+
+const deleteBook = async (bookId) => {
+  try {
+    const book = await getBook(bookId);
+    if (book) {
+      await book.destroy();
+    }
+    return null;
+  } catch (error) {
+    console.error("error deleting the book", error);
+    throw error;
+  }
+};
+module.exports = { createBook, getBook, getAllBooks, updateBook, deleteBook };
