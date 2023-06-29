@@ -12,7 +12,7 @@ const createLibrary = async (library) => {
 
 const getLibrary = async (id) => {
   try {
-    // busca un libro por id
+    // busca una libreria por id
     const library = await Library.findByPk(id, { include: { all: true } });
     return library;
   } catch (error) {

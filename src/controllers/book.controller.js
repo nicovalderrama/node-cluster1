@@ -9,4 +9,21 @@ const createBook = async (req, res) => {
   }
 };
 
-module.exports = { createBook };
+const getBook = async (req, res) => {
+  try {
+    const book = await bookServices.getBook(req.params.id);
+    res.json(book);
+  } catch (error) {
+    res.status(500).json({ action: "getBook", error: error.message });
+  }
+};
+
+const getAllBooks = async (req, res) => {
+  try {
+    const books = await bookServices.getAllBooks();
+    res.json(books);
+  } catch (error) {
+    res.status(500).json({ action: "getAllBooks", error: error.message });
+  }
+};
+module.exports = { createBook, getBook, getAllBooks };

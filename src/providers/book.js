@@ -1,4 +1,4 @@
-const { Book } = require("../models");
+const { Book, Library } = require("../models");
 
 const createBook = async (book) => {
   try {
@@ -10,4 +10,33 @@ const createBook = async (book) => {
   }
 };
 
-module.exports = { createBook };
+const getBook = async (bookId) => {
+  try {
+    const book = await Book.findByPk(bookId, {
+      include: [{
+        model: Library
+      }]
+    });
+    if (book) {
+      return book;
+    }
+    return null;
+  } catch (error) {
+    console.error("error searching for the book", error);
+  }
+};
+
+const getAllBooks = async () => {
+  try {
+    const books = await Book.findAll({
+      include: [{
+        model: Library
+      }],
+    });
+    return books;
+  } catch (error) {
+    console.error("error looking for the books", error);
+  }
+};
+
+module.exports = { createBook, getBook, getAllBooks };
