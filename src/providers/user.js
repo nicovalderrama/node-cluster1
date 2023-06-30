@@ -20,4 +20,24 @@ const authUser = async (name, password) => {
   }
 };
 
-module.exports = { createUser, authUser };
+const updateUser = async (id, user) => {
+  try {
+    const updatedUser = await User.update(user, { where: { id } });
+    return updatedUser;
+  } catch (error) {
+    console.error("error updating user", error);
+    throw error;
+  }
+};
+
+const deleteUser = async (id) => {
+  try {
+    const deletedUser = await User.destroy({ where: { id } });
+    return deletedUser;
+  } catch (error) {
+    console.error("error deleting user", error);
+    throw error;
+  }
+};
+
+module.exports = { createUser, authUser, updateUser, deleteUser };

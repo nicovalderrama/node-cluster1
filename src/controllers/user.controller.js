@@ -31,4 +31,22 @@ const authUser = async (req, res) => {
   }
 };
 
-module.exports = { createUser, authUser };
+const updateUser = async (req, res) => {
+  try {
+    const updatedUser = await userServices.updateUser(req.params.id, req.body);
+    res.json(updatedUser);
+  } catch (error) {
+    res.status(401).json({ action: "updateUser", error: error.message });
+  }
+};
+
+const deleteUser = async (req, res) => {
+  try {
+    const deletedUser = await userServices.deleteUser(req.params.id);
+    res.json(deletedUser);
+  } catch (error) {
+    res.status(401).json({ action: "deleteUser", error: error.message });
+  }
+};
+
+module.exports = { createUser, authUser, updateUser, deleteUser };
